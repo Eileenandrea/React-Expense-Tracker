@@ -42,7 +42,21 @@ function ExpenseForm(props) {
 		setEnteredTitle("");
 		setEnteredDate("");
 		setEnteredAmount("");
+		closeForm();
 	};
+	const closeForm = () => {
+		props.onOpenCloseForm(false);
+	};
+	const openForm = () => {
+		props.onOpenCloseForm(true);
+	};
+	if (!props.formStatus) {
+		return (
+			<button onClick={openForm} type="submit">
+				Add Expense
+			</button>
+		);
+	}
 	return (
 		<form onSubmit={submitHandler}>
 			<div className="new-expense__controls">
@@ -73,6 +87,9 @@ function ExpenseForm(props) {
 						max="2022-12-31"
 						onChange={dateChangeHandler}
 					/>
+				</div>
+				<div className="new-expense__actions">
+					<button onClick={closeForm}>Cancel</button>
 				</div>
 				<div className="new-expense__actions">
 					<button type="submit">Add Expense</button>
