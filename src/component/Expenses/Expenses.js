@@ -14,13 +14,18 @@ function Expenses(props) {
 	};
 	const filteredExpenses = [...props.expenses].filter(filterByYear);
 
+	let expensesContent = <p><p>No Expenses found</p></p>
+	if (filteredExpenses.length > 0) {
+		expensesContent = 	 <ExpensesList items={filteredExpenses} />	
+	 }
 	return (
 		<Card className="expenses">
 			<ExpensesFilter
 				selectedYear={selectedYear}
 				onFilterYear={filterExpenseHandler}
 			/>
-			<ExpensesList items={filteredExpenses} />
+			{expensesContent}
+			
 		</Card>
 	);
 }
